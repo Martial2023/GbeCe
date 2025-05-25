@@ -26,7 +26,7 @@ const Navbar = () => {
 
                         <Link
                             href="/about"
-                            className='group flex items-center space-x-2 px-4 py-2 rounded-lg  hover:text-primary hover:bg-primary/5 transition-all duration-300 font-medium'
+                            className=' group flex items-center space-x-2 px-4 py-2 rounded-lg  hover:text-primary hover:bg-primary/5 transition-all duration-300 font-medium'
                         >
                             <Info className='w-5 h-5 text-primary group-hover:scale-110 transition-transform duration-300' />
                             <span className='hidden md:block'>À propos</span>

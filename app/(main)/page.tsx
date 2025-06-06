@@ -59,7 +59,7 @@ export default function Home() {
 
   return (
     <main className="h-[90vh] flex flex-col">
-      <div className="flex-1 pt-12 overflow-y-auto h-96 mb-[130px]">
+      <div className="flex-1 pt-12 overflow-y-auto h-96 mb-[160x] md:mb-[130px]">
         {
           history.length == 0 && (
             <div className="px-4 h-full flex items-center justify-center">
@@ -106,7 +106,7 @@ export default function Home() {
             className="mb-2 mt-6"
             onClick={() => setShowExamples(!showExamples)}>
             <Music className="w-4 h-4 mr-2" />
-            <span className="hidden md:inline">Exemples</span>
+            <span>Exemples</span>
           </Button>
 
           <div className="relative flex items-center bg-primary-20 rounded-2xl border shadow-sm">

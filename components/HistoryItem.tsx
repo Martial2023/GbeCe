@@ -136,7 +136,7 @@ const HistoryItem = ({ item, index, currentPlaying, setCurrentPlaying, isPlaying
                 <div className="mb-4">
                     <p className={`leading-relaxed ${expanded ? '' : 'line-clamp-3'
                         }`}>
-                        {showTranslation? item.translation || 'Aucune traduction disponible' : (
+                        {showTranslation ? item.translation || 'Aucune traduction disponible' : (
                             showHMM ? item.hmm || 'Aucun HMM disponible' : item.transcription || 'Aucune transcription disponible'
                         )}
                     </p>
@@ -163,24 +163,14 @@ const HistoryItem = ({ item, index, currentPlaying, setCurrentPlaying, isPlaying
                         {currentPlaying === index && isPlaying ? (
                             <>
                                 <Pause className="w-4 h-4 mr-2" />
-                                Pause
+                                <span className="hidden md:inline-block">Pause</span>
                             </>
                         ) : (
                             <>
                                 <Play className="w-4 h-4 mr-2" />
-                                Écouter
+                                <span className="hidden md:inline-block">Play</span>
                             </>
                         )}
-                    </Button>
-
-                    <Button
-                        variant="outline"
-                        size="sm"
-                        onClick={() => setShowTranslation(!showTranslation)}
-                        className="hover:border-blue-300 transition-all duration-300"
-                    >
-                        <Languages className="w-4 h-4 mr-2" />
-                        { showTranslation? 'Originale' : 'Traduction' }
                     </Button>
 
                     <Button
@@ -196,10 +186,20 @@ const HistoryItem = ({ item, index, currentPlaying, setCurrentPlaying, isPlaying
                     <Button
                         variant="outline"
                         size="sm"
+                        onClick={() => setShowTranslation(!showTranslation)}
+                        className="hover:border-blue-300 transition-all duration-300"
+                    >
+                        <Languages className="w-4 h-4 mr-2" />
+                        <span className="hidden md:inline-block">{showTranslation ? 'Originale' : 'Traduction'}</span>
+                    </Button>
+
+                    <Button
+                        variant="outline"
+                        size="sm"
                         className="hover:border-green-300 transition-all duration-300"
                     >
                         <Download className="w-4 h-4 mr-2" />
-                        Télécharger
+                        <span className="hidden md:inline-block">Télécharger</span>
                     </Button>
                 </div>
             </div>

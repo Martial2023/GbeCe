@@ -59,7 +59,7 @@ export default function Home() {
 
   return (
     <main className="h-[90vh] flex flex-col">
-      <div className="flex-1 pt-12 overflow-y-auto h-96 mb-[160x] md:mb-[130px]">
+      <div className="flex-1 pt-12 overflow-y-auto h-96 mb-[140px] md:mb-[130px]">
         {
           history.length == 0 && (
             <div className="px-4 h-full flex items-center justify-center">

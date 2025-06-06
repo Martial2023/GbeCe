@@ -1,5 +1,5 @@
 'use client'
-import { Calendar, Clock, Copy, Download, Languages, MoreVertical, Pause, Play, Share2, Trash2 } from 'lucide-react';
+import { Calendar, Clock, Code, Copy, Download, Languages, MoreVertical, Pause, Play, Share2, Trash2 } from 'lucide-react';
 import React, { useEffect, useRef, useState } from 'react'
 import { Button } from './ui/button';
 import { HistoryProps } from '@/lib/types';
@@ -18,6 +18,7 @@ const HistoryItem = ({ item, index, currentPlaying, setCurrentPlaying, isPlaying
     const recorderControls = useVoiceVisualizer();
     const { setPreloadedAudioBlob } = recorderControls;
     const [showDropdown, setShowDropdown] = useState<number | null>(null);
+    const [showHMM, setShowHMM] = useState<boolean>(false);
     const [expanded, setExpanded] = useState<boolean>(false)
     const [showTranslation, setShowTranslation] = useState<boolean>(false)
     const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -94,7 +95,7 @@ const HistoryItem = ({ item, index, currentPlaying, setCurrentPlaying, isPlaying
                         </Button>
 
                         {showDropdown === index && (
-                            <div className="absolute border-gray-400 dark:bg-gray-900 right-0 top-full mt-1 w-48 bg-white dark:bg-gray-900 rounded-lg shadow-lg z-10">
+                            <div className="absolute border-gray-400 right-0 top-full mt-1 w-48 bg-white dark:bg-gray-900 rounded-lg shadow-lg z-10">
                                 <div className="p-2">
                                     <button
                                         onClick={() => {
@@ -135,7 +136,9 @@ const HistoryItem = ({ item, index, currentPlaying, setCurrentPlaying, isPlaying
                 <div className="mb-4">
                     <p className={`leading-relaxed ${expanded ? '' : 'line-clamp-3'
                         }`}>
-                        {showTranslation? item.translation || 'Aucune traduction disponible' : item.transcription || 'Aucune transcription disponible'}
+                        {showTranslation? item.translation || 'Aucune traduction disponible' : (
+                            showHMM ? item.hmm || 'Aucun HMM disponible' : item.transcription || 'Aucune transcription disponible'
+                        )}
                     </p>
                     {item.transcription && item.transcription.length > 150 && (
                         <button
@@ -178,6 +181,16 @@ const HistoryItem = ({ item, index, currentPlaying, setCurrentPlaying, isPlaying
                     >
                         <Languages className="w-4 h-4 mr-2" />
                         { showTranslation? 'Originale' : 'Traduction' }
+                    </Button>
+
+                    <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => setShowHMM(!showHMM)}
+                        className="hover:border-blue-300 transition-all duration-300"
+                    >
+                        <Code className="w-4 h-4 mr-2" />
+                        HMM
                     </Button>
 
                     <Button

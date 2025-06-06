@@ -84,7 +84,8 @@ const AudioFileImport: React.FC<Props> = ({ history, setHistory, isTranscribing,
             const currentRequest: HistoryProps = {
                 audio: selectedFile,
                 transcription: '',
-                translation: ''
+                translation: '',
+                hmm: '',
             };
 
             const formData = new FormData();
@@ -103,14 +104,35 @@ const AudioFileImport: React.FC<Props> = ({ history, setHistory, isTranscribing,
             if (data.transcription) {
                 currentRequest.transcription = data.transcription;
                 currentRequest.translation = data.translation;
+                // setHistory((prevHistory) => [...prevHistory, currentRequest]);
+                // setSelectedFile(null); // Réinitialiser après transcription
+                // const closer = document.getElementById('audio-import-close');
+                // if (closer) {
+                //     closer.click();
+                // }
+            } else {
+                throw new Error('Aucune transcription reçue');
+            }
+
+            // Envoi à l'API HMM
+            const responseHMM = await fetch(process.env.NEXT_PUBLIC_API_HMM_URL + '/api/transcribe', {
+                method: 'POST',
+                body: formData,
+            });
+
+            if (!responseHMM.ok) {
+                throw new Error('Erreur lors de la transcription');
+            }
+
+            const dataHMM = await responseHMM.json();
+            if (dataHMM.transcription) {
+                currentRequest.hmm = dataHMM.transcription.split('\n')[0];
                 setHistory((prevHistory) => [...prevHistory, currentRequest]);
                 setSelectedFile(null); // Réinitialiser après transcription
                 const closer = document.getElementById('audio-import-close');
                 if (closer) {
                     closer.click();
                 }
-            } else {
-                throw new Error('Aucune transcription reçue');
             }
         } catch (error) {
             alert(error || 'Erreur inconnue');
@@ -162,7 +184,7 @@ const AudioFileImport: React.FC<Props> = ({ history, setHistory, isTranscribing,
                                     className="hidden"
                                 />
                                 <Button
-                                variant={"outline"}
+                                    variant={"outline"}
                                     onClick={() => fileInputRef.current?.click()}
                                     className="mt-2 text-primary/40 hover:text-primary"
                                 >

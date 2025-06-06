@@ -5,7 +5,7 @@ import { ThemeToggle } from './ThemeToggle'
 
 const Navbar = () => {
     return (
-        <nav className='sticky top-0 z-50 w-full border-b border-gray-200/20 shadow-sm'>
+        <nav className='sticky top-0 z-50 w-full border-b border-gray-200/20 shadow-sm bg-white dark:bg-gray-900'>
             <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
                 <div className='flex justify-between items-center h-16'>
                     <Link href="/" className='flex items-center space-x-0 group'>
@@ -17,7 +17,7 @@ const Navbar = () => {
                             <span className=' group-hover: transition-colors duration-300'>
                                 Gbe
                             </span>
-                            <span className='text-primary'>Ce</span>
+                            <span className='text-primary'>Cé</span>
                         </h2>
                     </Link>
 

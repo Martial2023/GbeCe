@@ -3,7 +3,7 @@ import { CheckCircleIcon } from "lucide-react";
 
 export default function About() {
   return (
-    <section className="max-w-5xl mx-auto md:px-6 py-10 space-y-10">
+    <section className="max-w-5xl mx-auto px-2 md:px-6 py-10 space-y-10">
       {/* Introduction HMM */}
       <Card className="shadow-md">
         <CardHeader>
